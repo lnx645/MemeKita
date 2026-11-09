@@ -1,9 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
-        <ImageView android:id="@+id/ivMedia" android:layout_width="match_parent" android:layout_height="300dp" android:contentDescription="Media" />
-        <TextView android:id="@+id/tvTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp" android:fontFamily="@font/manrope_medium" />
-        <LinearLayout android:id="@+id/reactionBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" />
-        <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerComments" android:layout_width="match_parent" android:layout_height="wrap_content" />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <FrameLayout android:layout_width="match_parent" android:layout_height="300dp">
+            <ImageView android:id="@+id/ivMedia" android:layout_width="match_parent" android:layout_height="match_parent"
+                android:scaleType="centerCrop" android:contentDescription="Media" android:background="@color/surface" />
+            <View android:id="@+id/blurNsfw" android:layout_width="match_parent" android:layout_height="match_parent"
+                android:background="#AA000000" android:visibility="gone" />
+            <TextView android:id="@+id/tvNsfw" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="NSFW — Ketuk untuk lihat" android:textColor="#FFFFFF" android:visibility="gone"
+                android:layout_gravity="center" android:background="@color/danger" android:padding="8dp" />
+            <ProgressBar android:id="@+id/skeleton" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+        <LinearLayout android:id="@+id/content" android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="16dp">
+            <TextView android:id="@+id/tvTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Judul" android:textSize="16sp" android:fontFamily="@font/manrope_medium" android:maxLines="2" />
+            <TextView android:id="@+id/tvInfo" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="username • 5 menit lalu • Funny" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="4dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="8dp">
+                <ImageView android:id="@+id/btnUp" android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/arrow_up_float" android:contentDescription="Vote naik" />
+                <TextView android:id="@+id/tvScore" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1,2 rb" />
+                <ImageView android:id="@+id/btnDown" android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/arrow_down_float" android:contentDescription="Vote turun" />
+                <ImageView android:id="@+id/btnComment" android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/sym_action_chat" android:contentDescription="Komentar" />
+                <ImageView android:id="@+id/btnShare" android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/ic_menu_share" android:contentDescription="Bagikan" />
+                <ImageView android:id="@+id/btnBookmark" android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/btn_star_big_on" android:contentDescription="Simpan" />
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnSawer"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Sawer" android:layout_marginStart="8dp" app:icon="@android:drawable/ic_menu_send" />
+            </LinearLayout>
+            <LinearLayout android:id="@+id/reactionBar" android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="12dp">
+                <com.google.android.material.chip.Chip android:id="@+id/btnNgakak" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ngakak" app:chipIcon="@android:drawable/btn_star_big_on" />
+                <com.google.android.material.chip.Chip android:id="@+id/btnRelate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Relate banget" />
+                <com.google.android.material.chip.Chip android:id="@+id/btnAnjay" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Anjay" />
+                <com.google.android.material.chip.Chip android:id="@+id/btnSedih" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sedih" />
+                <com.google.android.material.chip.Chip android:id="@+id/btnMarah" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Marah" />
+            </LinearLayout>
+            <TextView android:id="@+id/tvRelatePercent" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="87% orang relate" android:textColor="@color/primary" android:layout_marginTop="4dp" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginTop="12dp" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Komentar" android:textStyle="bold" android:layout_marginTop="12dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginTop="8dp">
+                <ImageView android:layout_width="32dp" android:layout_height="32dp" android:src="@android:drawable/sym_def_app_icon" android:contentDescription="Avatar" />
+                <EditText android:id="@+id/etComment" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:hint="Tulis komentar..." android:background="@drawable/bg_comment" android:padding="8dp" android:layout_marginStart="8dp" />
+                <ImageView android:id="@+id/btnImageComment" android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/ic_menu_gallery" android:contentDescription="Balas bergambar" />
+                <ImageView android:id="@+id/btnSend" android:layout_width="48dp" android:layout_height="48dp" android:src="@android:drawable/ic_menu_send" android:contentDescription="Kirim" />
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView android:id="@+id/recyclerComments"
+                android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
