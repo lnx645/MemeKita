@@ -21,8 +21,14 @@ func (h *DuelHandler) VoteDuel(ctx context.Context, req *gen.VoteDuelRequest) (*
 	if !ok {
 		return nil, status.Error(codes.Unauthenticated, "perlu login")
 	}
-	sub, _ := claims["sub"].(string)
-	uid, _ := uuid.Parse(sub)
+	sub, ok := claims["sub"].(string)
+	if !ok || sub == "" {
+		return nil, status.Error(codes.Unauthenticated, "perlu login")
+	}
+	uid, errParse := uuid.Parse(sub)
+	if errParse != nil {
+		return nil, status.Error(codes.Unauthenticated, "token tidak valid")
+	}
 	duelID, err := uuid.Parse(req.DuelId)
 	if err != nil {
 		return nil, status.Error(codes.InvalidArgument, "duel_id tidak valid")

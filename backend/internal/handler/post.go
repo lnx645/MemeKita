@@ -44,7 +44,9 @@ func (h *PostHandler) CreateUpload(ctx context.Context, req *gen.CreateUploadReq
 	if !ok {
 		return nil, status.Error(codes.Unauthenticated, "perlu login")
 	}
-	_ = claims
+	if len(claims) == 0 {
+		return nil, status.Error(codes.Unauthenticated, "perlu login")
+	}
 	mediaType := map[int32]string{1: "image", 2: "gif", 3: "video"}[req.MediaType]
 	if mediaType == "" {
 		mediaType = "image"

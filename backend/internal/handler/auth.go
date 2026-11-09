@@ -57,11 +57,20 @@ func (h *AuthHandler) RefreshToken(ctx context.Context, req *gen.RefreshTokenReq
 	if err != nil {
 		return nil, status.Error(codes.Unauthenticated, "token tidak valid")
 	}
-	sub, _ := claims["sub"].(string)
+	sub, ok := claims["sub"].(string)
+	if !ok || sub == "" {
+		return nil, status.Error(codes.Unauthenticated, "token tidak valid")
+	}
 	uid, err := uuid.Parse(sub)
 	if err != nil {
 		return nil, status.Error(codes.Unauthenticated, "token tidak valid")
 	}
-	_ = uid
-	return nil, status.Error(codes.Unimplemented, "refresh belum")
+	user, err := h.uc.FindByID(ctx, uid)
+	if err != nil {
+		return nil, status.Error(codes.Unauthenticated, "token tidak valid")
+	}
+	if user.Status == "blocked" {
+		return nil, status.Error(codes.PermissionDenied, "akun diblokir")
+	}
+	return nil, status.Error(codes.Unimplemented, "refresh belum diimplementasi")
 }

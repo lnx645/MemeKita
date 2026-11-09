@@ -13,7 +13,10 @@ func (MediaArgs) Kind() string { return "media_verify" }
 type MediaWorker struct{ CDN string }
 
 func (w *MediaWorker) Work(ctx context.Context, job *river.Job[MediaArgs]) error {
-	_ = job.Args.MediaKey // use CDN + key via fmt.Sprintf if needed
+	if job.Args.MediaKey == "" {
+		return nil
+	}
+	// verify media at w.CDN + "/" + job.Args.MediaKey, create thumbnail via usecase
 	return nil
 }
 

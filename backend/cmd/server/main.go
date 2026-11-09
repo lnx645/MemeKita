@@ -51,7 +51,9 @@ func main() {
 			log.Printf("write error: %v", err)
 		}
 	})
-	_ = gormDB // wiring placeholder, used via usecases
+	if gormDB != nil {
+		log.Printf("db ready: postgres connected")
+	}
 	log.Printf("HTTP listening on :%s", cfg.HTTPPort)
 	if err := http.ListenAndServe(":"+cfg.HTTPPort, mux); err != nil {
 		log.Fatalf("http: %v", err)

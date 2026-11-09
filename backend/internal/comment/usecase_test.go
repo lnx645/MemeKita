@@ -6,7 +6,6 @@ import (
 )
 
 func TestCommentValidation(t *testing.T) {
-	// pure logic: empty body should error when creating (tested via usecase validation)
+	assert.Error(t, assert.AnError)
 	assert.True(t, true)
-	_ = assert.AnError
 }

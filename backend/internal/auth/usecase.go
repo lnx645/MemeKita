@@ -119,6 +119,10 @@ func (uc *Usecase) Login(ctx context.Context, email, password string) (*models.U
 	return u, access, refresh, err
 }
 
+func (uc *Usecase) FindByID(ctx context.Context, id uuid.UUID) (*models.User, error) {
+	return uc.repo.FindByID(ctx, id)
+}
+
 func (uc *Usecase) VerifyAccessToken(token string) (jwt.MapClaims, error) {
 	t, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) { return []byte(uc.cfg.JWTSecret), nil })
 	if err != nil || !t.Valid {

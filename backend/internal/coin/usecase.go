@@ -2,7 +2,9 @@ package coin
 
 import (
 	"context"
+	"errors"
 	"fmt"
+
 	"github.com/google/uuid"
 	"github.com/memekita/backend/internal/models"
 	"gorm.io/gorm"
@@ -38,8 +40,10 @@ func (uc *Usecase) Topup(ctx context.Context, userID, packageID uuid.UUID, purch
 			return err
 		}
 		var cur models.UserCoin
-		if err := tx.WithContext(ctx).Where("user_id = ?", userID).First(&cur).Error; err != nil && err.Error() != "record not found" {
-			return err
+		if err := tx.WithContext(ctx).Where("user_id = ?", userID).First(&cur).Error; err != nil {
+			if !errors.Is(err, gorm.ErrRecordNotFound) {
+				return err
+			}
 		}
 		newBal = cur.BalanceCoins + pkg.Coins
 		if err := tx.WithContext(ctx).Exec("INSERT INTO user_coins (user_id, balance_coins) VALUES (?,?) ON CONFLICT (user_id) DO UPDATE SET balance_coins = ?", userID, newBal, newBal).Error; err != nil {
@@ -61,15 +65,19 @@ func (uc *Usecase) SendTip(ctx context.Context, senderID, receiverID, postID uui
 	var newSender int
 	err := uc.db.WithContext(ctx).Transaction(func(tx *gorm.DB) error {
 		var senderBal models.UserCoin
-		if err := tx.WithContext(ctx).Where("user_id = ?", senderID).First(&senderBal).Error; err != nil && err.Error() != "record not found" {
-			return err
+		if err := tx.WithContext(ctx).Where("user_id = ?", senderID).First(&senderBal).Error; err != nil {
+			if !errors.Is(err, gorm.ErrRecordNotFound) {
+				return err
+			}
 		}
 		if senderBal.BalanceCoins < amount {
 			return fmt.Errorf("Koin tidak cukup")
 		}
 		var receiverBal models.UserCoin
-		if err := tx.WithContext(ctx).Where("user_id = ?", receiverID).First(&receiverBal).Error; err != nil && err.Error() != "record not found" {
-			return err
+		if err := tx.WithContext(ctx).Where("user_id = ?", receiverID).First(&receiverBal).Error; err != nil {
+			if !errors.Is(err, gorm.ErrRecordNotFound) {
+				return err
+			}
 		}
 		newSender = senderBal.BalanceCoins - amount
 		newReceiver := receiverBal.BalanceCoins + amount

@@ -66,7 +66,7 @@ Login admin: `admin@memekita.id / admin12345` (seed). Semua tindakan tercatat di
 
 ```bash
 buf lint proto
-buf breaking proto --against '.git#branch=main'
+buf breaking proto --against '.git#branch=main,subdir=proto'
 # generate Go + Kotlin
 buf generate proto --template proto/buf.gen.yaml
 # Go stubs: backend/proto/gen, Kotlin: android/app/src/main/java/com/meme_kita/mobile/proto

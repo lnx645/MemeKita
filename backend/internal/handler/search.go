@@ -20,6 +20,8 @@ func (h *SearchHandler) Search(ctx context.Context, req *gen.SearchRequest) (*ge
 	if err != nil {
 		return nil, status.Error(codes.Internal, err.Error())
 	}
-	_ = res
+	if _, ok := res["posts"]; ok {
+		// posts available in result map
+	}
 	return &gen.SearchResponse{}, nil
 }

@@ -42,8 +42,12 @@ func (uc *Usecase) CloseExpired(ctx context.Context) error {
 	}
 	for _, d := range duels {
 		var aCount, bCount int64
-		uc.db.WithContext(ctx).Model(&models.DuelVote{}).Where("duel_id = ? AND post_id = ?", d.ID, d.PostAID).Count(&aCount)
-		uc.db.WithContext(ctx).Model(&models.DuelVote{}).Where("duel_id = ? AND post_id = ?", d.ID, d.PostBID).Count(&bCount)
+		if err := uc.db.WithContext(ctx).Model(&models.DuelVote{}).Where("duel_id = ? AND post_id = ?", d.ID, d.PostAID).Count(&aCount).Error; err != nil {
+			return err
+		}
+		if err := uc.db.WithContext(ctx).Model(&models.DuelVote{}).Where("duel_id = ? AND post_id = ?", d.ID, d.PostBID).Count(&bCount).Error; err != nil {
+			return err
+		}
 		var winner *uuid.UUID
 		if aCount > bCount {
 			winner = &d.PostAID
