@@ -3,11 +3,12 @@ package notification
 import (
 	"context"
 	"github.com/google/uuid"
-	"gorm.io/gorm"
 	"github.com/memekita/backend/internal/models"
+	"gorm.io/gorm"
 )
 
 type Usecase struct{ db *gorm.DB }
+
 func NewUsecase(db *gorm.DB) *Usecase { return &Usecase{db: db} }
 
 func (uc *Usecase) Notify(ctx context.Context, userID uuid.UUID, typ string, refID *uuid.UUID, actorID *uuid.UUID, message string) error {
@@ -15,9 +16,13 @@ func (uc *Usecase) Notify(ctx context.Context, userID uuid.UUID, typ string, ref
 }
 func (uc *Usecase) List(ctx context.Context, userID uuid.UUID, filter string, limit int) ([]models.Notification, error) {
 	q := uc.db.WithContext(ctx).Where("user_id = ?", userID).Order("created_at DESC").Limit(limit)
-	if filter == "unread" { q = q.Where("read_at IS NULL") }
+	if filter == "unread" {
+		q = q.Where("read_at IS NULL")
+	}
 	var out []models.Notification
-	if err := q.Find(&out).Error; err != nil { return nil, err }
+	if err := q.Find(&out).Error; err != nil {
+		return nil, err
+	}
 	return out, nil
 }
 func (uc *Usecase) MarkRead(ctx context.Context, userID, notifID uuid.UUID) error {

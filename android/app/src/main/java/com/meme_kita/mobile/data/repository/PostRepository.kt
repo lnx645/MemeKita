@@ -10,8 +10,8 @@ import javax.inject.Singleton
 
 @Singleton
 class PostRepository @Inject constructor(private val grpc: GrpcClient) {
-    // In real app, use generated gRPC stubs; here we simulate via REST fallback for demo
-    // For production, stubs generated from proto via grpc-kotlin
+    // In real app, use generated gRPC code; here we simulate via REST fallback for demo
+    // For production, generated code from proto via grpc-kotlin
     suspend fun getFeed(tab: String, cursor: String?, limit: Int, includeNsfw: Boolean): Result<List<Post>> = withContext(Dispatchers.IO) {
         try {
             // Simulate network; in real implementation call FeedServiceGrpc

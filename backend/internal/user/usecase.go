@@ -3,21 +3,26 @@ package user
 import (
 	"context"
 	"github.com/google/uuid"
-	"gorm.io/gorm"
 	"github.com/memekita/backend/internal/models"
+	"gorm.io/gorm"
 )
 
 type Usecase struct{ db *gorm.DB }
+
 func NewUsecase(db *gorm.DB) *Usecase { return &Usecase{db: db} }
 
 func (uc *Usecase) GetByID(ctx context.Context, id uuid.UUID) (*models.User, error) {
 	var u models.User
-	if err := uc.db.WithContext(ctx).Where("id = ?", id).First(&u).Error; err != nil { return nil, err }
+	if err := uc.db.WithContext(ctx).Where("id = ?", id).First(&u).Error; err != nil {
+		return nil, err
+	}
 	return &u, nil
 }
 func (uc *Usecase) GetByUsername(ctx context.Context, username string) (*models.User, error) {
 	var u models.User
-	if err := uc.db.WithContext(ctx).Where("username = ?", username).First(&u).Error; err != nil { return nil, err }
+	if err := uc.db.WithContext(ctx).Where("username = ?", username).First(&u).Error; err != nil {
+		return nil, err
+	}
 	return &u, nil
 }
 func (uc *Usecase) Follow(ctx context.Context, followerID, targetID uuid.UUID) error {

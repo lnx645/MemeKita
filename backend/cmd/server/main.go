@@ -6,7 +6,6 @@ import (
 	"net"
 	"net/http"
 
-	"gorm.io/gorm"
 	"github.com/memekita/backend/internal/config"
 	"github.com/memekita/backend/internal/db"
 	"github.com/memekita/backend/internal/handler"
@@ -22,7 +21,6 @@ func main() {
 		log.Fatalf("db: %v", err)
 	}
 	// wiring — only constructors, no business logic in main
-
 
 	lis, err := net.Listen("tcp", ":"+cfg.GRPCPort)
 	if err != nil {
@@ -53,11 +51,9 @@ func main() {
 			log.Printf("write error: %v", err)
 		}
 	})
+	_ = gormDB // wiring placeholder, used via usecases
 	log.Printf("HTTP listening on :%s", cfg.HTTPPort)
 	if err := http.ListenAndServe(":"+cfg.HTTPPort, mux); err != nil {
 		log.Fatalf("http: %v", err)
 	}
 }
-
-// Ensure gorm import used
-var _ *gorm.DB
