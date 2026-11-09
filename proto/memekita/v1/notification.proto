@@ -2,6 +2,7 @@ syntax = "proto3";
 package memekita.v1;
 
 option java_package = "com.meme_kita.mobile.proto";
+option go_package = "github.com/memekita/backend/proto/gen;gen";
 option java_multiple_files = true;
 
 service NotificationService {
