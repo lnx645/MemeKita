@@ -1,0 +1,57 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+service SectionService {
+  rpc ListSections(ListSectionsRequest) returns (ListSectionsResponse);
+  rpc GetSection(GetSectionRequest) returns (GetSectionResponse);
+  rpc FollowSection(FollowSectionRequest) returns (FollowSectionResponse);
+  rpc UnfollowSection(UnfollowSectionRequest) returns (UnfollowSectionResponse);
+}
+
+message Section {
+  string id = 1;
+  string slug = 2;
+  string name = 3;
+  string description = 4;
+  bool is_nsfw = 5;
+  bool is_regional = 6;
+  string icon = 7;
+  int64 post_count = 8;
+  bool is_following = 9;
+  string moderator_id = 10;
+}
+
+message ListSectionsRequest {
+  bool include_regional = 1;
+}
+
+message ListSectionsResponse {
+  repeated Section sections = 1;
+}
+
+message GetSectionRequest {
+  string slug = 1;
+}
+
+message GetSectionResponse {
+  Section section = 1;
+}
+
+message FollowSectionRequest {
+  string section_id = 1;
+}
+
+message FollowSectionResponse {
+  bool success = 1;
+}
+
+message UnfollowSectionRequest {
+  string section_id = 1;
+}
+
+message UnfollowSectionResponse {
+  bool success = 1;
+}

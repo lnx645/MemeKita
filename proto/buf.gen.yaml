@@ -1,0 +1,11 @@
+version: v1
+plugins:
+  - plugin: buf.build/protocolbuffers/go
+    out: gen/go
+    opt: paths=source_relative
+  - plugin: elixir
+    out: ../backend/lib/memekita/proto
+    opt: gen_descriptors=true
+  - plugin: buf.build/grpc/kotlin
+    out: ../android/app/src/main/java
+    opt: lite=false

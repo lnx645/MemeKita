@@ -1,0 +1,3 @@
+:root { --primary:#6C4CF1; --accent:#00B8A9; --bg:#fff; --surface:#F6F5FA }
+* { box-sizing: border-box }
+body { margin:0; font-family: 'Manrope', system-ui, sans-serif; background: var(--bg); color:#1A1A1A }

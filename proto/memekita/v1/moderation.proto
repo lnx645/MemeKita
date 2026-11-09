@@ -1,0 +1,70 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+service ModerationService {
+  rpc ListReports(ListReportsRequest) returns (ListReportsResponse);
+  rpc ResolveReport(ResolveReportRequest) returns (ResolveReportResponse);
+  rpc GetModActions(GetModActionsRequest) returns (GetModActionsResponse);
+}
+
+message Report {
+  string id = 1;
+  string reporter_id = 2;
+  string target_type = 3;
+  string target_id = 4;
+  string reason = 5;
+  string description = 6;
+  string status = 7;
+  string handled_by = 8;
+  string created_at = 9;
+  string target_preview = 10;
+  string reporter_name = 11;
+}
+
+message ListReportsRequest {
+  string status = 1;
+  string reason = 2;
+  string cursor = 3;
+  int32 limit = 4;
+}
+
+message ListReportsResponse {
+  repeated Report reports = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message ResolveReportRequest {
+  string report_id = 1;
+  string action = 2; // ignore, hide, remove, remove_and_block
+  string note = 3;
+}
+
+message ResolveReportResponse {
+  bool success = 1;
+}
+
+message ModAction {
+  string id = 1;
+  string moderator_id = 2;
+  string moderator_name = 3;
+  string target_type = 4;
+  string target_id = 5;
+  string action = 6;
+  string note = 7;
+  string created_at = 8;
+}
+
+message GetModActionsRequest {
+  string cursor = 1;
+  int32 limit = 2;
+}
+
+message GetModActionsResponse {
+  repeated ModAction actions = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}

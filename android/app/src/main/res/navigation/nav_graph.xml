@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/feedFragment">
+    <fragment android:id="@+id/feedFragment" android:name="com.meme_kita.mobile.ui.feed.FeedFragment" android:label="Beranda" />
+    <fragment android:id="@+id/duelFragment" android:name="com.meme_kita.mobile.ui.duel.DuelFragment" android:label="Duel" />
+    <fragment android:id="@+id/uploadFragment" android:name="com.meme_kita.mobile.ui.upload.UploadFragment" android:label="Buat" />
+    <fragment android:id="@+id/challengeFragment" android:name="com.meme_kita.mobile.ui.challenge.ChallengeFragment" android:label="Tantangan" />
+    <fragment android:id="@+id/profileFragment" android:name="com.meme_kita.mobile.ui.profile.ProfileFragment" android:label="Profil" />
+    <fragment android:id="@+id/searchFragment" android:name="com.meme_kita.mobile.ui.search.SearchFragment" android:label="Cari" />
+    <fragment android:id="@+id/notificationFragment" android:name="com.meme_kita.mobile.ui.notification.NotificationFragment" android:label="Notifikasi" />
+    <fragment android:id="@+id/detailFragment" android:name="com.meme_kita.mobile.ui.detail.DetailFragment" android:label="Post" />
+    <fragment android:id="@+id/authFragment" android:name="com.meme_kita.mobile.ui.auth.AuthFragment" android:label="Masuk" />
+    <fragment android:id="@+id/generatorFragment" android:name="com.meme_kita.mobile.ui.generator.GeneratorFragment" android:label="Buat Meme" />
+</navigation>

@@ -1,0 +1,2 @@
+import { Card, Table, Button, Badge } from '../../components/Astryx'
+export default function Templates(){ return <div><h1>Template Meme</h1><Card><Table columns={[{key:'name',title:'Nama'},{key:'status',title:'Status',render:(v:any)=><Badge>{v}</Badge>},{key:'aksi',title:'',render:()=><><Button>Setujui</Button> <Button variant="danger">Tolak</Button></> }]} data={[{name:'Drake', status:'pending'}]} /></Card></div> }

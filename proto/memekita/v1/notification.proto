@@ -1,0 +1,72 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+service NotificationService {
+  rpc ListNotifications(ListNotificationsRequest) returns (ListNotificationsResponse);
+  rpc MarkRead(MarkReadRequest) returns (MarkReadResponse);
+  rpc MarkAllRead(MarkAllReadRequest) returns (MarkAllReadResponse);
+  rpc GetUnreadCount(GetUnreadCountRequest) returns (GetUnreadCountResponse);
+  rpc UpdatePreferences(UpdateNotificationPreferencesRequest) returns (UpdateNotificationPreferencesResponse);
+}
+
+message Notification {
+  string id = 1;
+  string type = 2;
+  string ref_id = 3;
+  string actor_id = 4;
+  string actor_name = 5;
+  string actor_avatar = 6;
+  string post_thumb = 7;
+  string message = 8;
+  string read_at = 9;
+  string created_at = 10;
+}
+
+message ListNotificationsRequest {
+  string cursor = 1;
+  int32 limit = 2;
+  string filter = 3; // all, unread
+}
+
+message ListNotificationsResponse {
+  repeated Notification notifications = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message MarkReadRequest {
+  string notification_id = 1;
+}
+
+message MarkReadResponse {
+  bool success = 1;
+}
+
+message MarkAllReadRequest {}
+
+message MarkAllReadResponse {
+  bool success = 1;
+}
+
+message GetUnreadCountRequest {}
+
+message GetUnreadCountResponse {
+  int64 count = 1;
+}
+
+message UpdateNotificationPreferencesRequest {
+  bool comment_reply = 1;
+  bool vote_on_post = 2;
+  bool new_follower = 3;
+  bool moderation = 4;
+  bool duel_result = 5;
+  bool challenge = 6;
+  bool tip_received = 7;
+}
+
+message UpdateNotificationPreferencesResponse {
+  bool success = 1;
+}

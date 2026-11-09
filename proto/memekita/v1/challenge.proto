@@ -1,0 +1,55 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/post.proto";
+
+service ChallengeService {
+  rpc ListChallenges(ListChallengesRequest) returns (ListChallengesResponse);
+  rpc GetChallenge(GetChallengeRequest) returns (GetChallengeResponse);
+  rpc GetChallengeEntries(GetChallengeEntriesRequest) returns (GetChallengeEntriesResponse);
+}
+
+message Challenge {
+  string id = 1;
+  string title = 2;
+  string theme = 3;
+  string starts_at = 4;
+  string ends_at = 5;
+  string status = 6;
+  int64 entry_count = 7;
+}
+
+message ListChallengesRequest {
+  string status = 1;
+  string cursor = 2;
+  int32 limit = 3;
+}
+
+message ListChallengesResponse {
+  repeated Challenge challenges = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message GetChallengeRequest {
+  string challenge_id = 1;
+}
+
+message GetChallengeResponse {
+  Challenge challenge = 1;
+}
+
+message GetChallengeEntriesRequest {
+  string challenge_id = 1;
+  string cursor = 2;
+  int32 limit = 3;
+}
+
+message GetChallengeEntriesResponse {
+  repeated Post posts = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}

@@ -1,0 +1,47 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+service TemplateService {
+  rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse);
+  rpc SubmitTemplate(SubmitTemplateRequest) returns (SubmitTemplateResponse);
+}
+
+message MemeTemplate {
+  string id = 1;
+  string name = 2;
+  string image_url = 3;
+  int32 width = 4;
+  int32 height = 5;
+  string text_boxes_json = 6;
+  bool is_official = 7;
+  string status = 8;
+  string created_at = 9;
+}
+
+message ListTemplatesRequest {
+  string query = 1;
+  bool official_only = 2;
+  string cursor = 3;
+  int32 limit = 4;
+}
+
+message ListTemplatesResponse {
+  repeated MemeTemplate templates = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message SubmitTemplateRequest {
+  string name = 1;
+  string image_key = 2;
+  int32 width = 3;
+  int32 height = 4;
+  string text_boxes_json = 5;
+}
+
+message SubmitTemplateResponse {
+  MemeTemplate template = 1;
+}

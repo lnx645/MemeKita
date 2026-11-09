@@ -1,0 +1,63 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+service TipService {
+  rpc SendTip(SendTipRequest) returns (SendTipResponse);
+  rpc ListTips(ListTipsRequest) returns (ListTipsResponse);
+  rpc GetLeaderboard(GetLeaderboardRequest) returns (GetLeaderboardResponse);
+}
+
+message SendTipRequest {
+  string post_id = 1;
+  int64 amount_coins = 2;
+}
+
+message SendTipResponse {
+  bool success = 1;
+  int64 sender_balance = 2;
+  string transaction_id = 3;
+}
+
+message Tip {
+  string id = 1;
+  string sender_id = 2;
+  string sender_name = 3;
+  string receiver_id = 4;
+  string receiver_name = 5;
+  string post_id = 6;
+  int64 amount_coins = 7;
+  string created_at = 8;
+}
+
+message ListTipsRequest {
+  string user_id = 1;
+  string type = 2; // sent, received
+  string cursor = 3;
+  int32 limit = 4;
+}
+
+message ListTipsResponse {
+  repeated Tip tips = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message LeaderboardEntry {
+  string user_id = 1;
+  string username = 2;
+  string avatar_url = 3;
+  int64 total_coins = 4;
+  int32 rank = 5;
+}
+
+message GetLeaderboardRequest {
+  string period = 1; // weekly, all_time
+  int32 limit = 2;
+}
+
+message GetLeaderboardResponse {
+  repeated LeaderboardEntry entries = 1;
+}

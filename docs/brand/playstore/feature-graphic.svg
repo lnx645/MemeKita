@@ -1,0 +1,7 @@
+<svg width="1024" height="500" viewBox="0 0 1024 500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="500" fill="#6C4CF1"/>
+  <circle cx="260" cy="250" r="110" fill="#FFD93D" stroke="white" stroke-width="10"/>
+  <path d="M 200 285 Q 260 360 320 285 Q 260 310 200 285" fill="#1A1A1A"/>
+  <text x="420" y="220" font-family="Manrope, sans-serif" font-size="72" font-weight="800" fill="white">MemeKita</text>
+  <text x="420" y="270" font-family="Manrope, sans-serif" font-size="24" fill="#F6F5FA">Meme terbaru setiap hari • Duel • Tantangan • Sawer</text>
+</svg>

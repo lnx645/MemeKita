@@ -1,0 +1,42 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/common.proto";
+
+service ReactionService {
+  rpc ReactPost(ReactPostRequest) returns (ReactPostResponse);
+  rpc GetReactions(GetReactionsRequest) returns (GetReactionsResponse);
+}
+
+message ReactPostRequest {
+  string post_id = 1;
+  ReactionType reaction = 2;
+}
+
+message ReactPostResponse {
+  bool success = 1;
+  ReactionType my_reaction = 2;
+}
+
+message ReactionCounts {
+  int64 ngakak = 1;
+  int64 relate = 2;
+  int64 anjay = 3;
+  int64 sedih = 4;
+  int64 marah = 5;
+  int64 total = 6;
+}
+
+message GetReactionsRequest {
+  string post_id = 1;
+}
+
+message GetReactionsResponse {
+  ReactionCounts counts = 1;
+  ReactionType my_reaction = 2;
+  string top_reaction = 3;
+  double top_percent = 4;
+}

@@ -1,0 +1,39 @@
+# Elixir
+/backend/_build
+/backend/deps
+/backend/*.ez
+/backend/memekita-*.tar
+/backend/.elixir_ls
+
+# Node
+/admin/node_modules
+/admin/dist
+/admin/.vite
+
+# Android
+/android/.gradle
+/android/build
+/android/app/build
+/android/.idea
+/android/local.properties
+/android/*.iml
+
+# Proto gen
+/backend/lib/memekita/proto/gen
+/android/app/src/main/java/com/meme_kita/mobile/proto
+
+# Secrets — never commit
+/home/demo/Downloads/takmungkin
+/home/demo/Downloads/cloudflare
+*.json
+**/service-account*.json
+**/google-services.json
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

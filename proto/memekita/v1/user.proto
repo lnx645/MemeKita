@@ -1,0 +1,107 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/post.proto";
+
+service UserService {
+  rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+  rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
+  rpc FollowUser(FollowUserRequest) returns (FollowUserResponse);
+  rpc UnfollowUser(UnfollowUserRequest) returns (UnfollowUserResponse);
+  rpc ListUserPosts(ListUserPostsRequest) returns (ListUserPostsResponse);
+  rpc GetFollowStats(GetFollowStatsRequest) returns (GetFollowStatsResponse);
+  rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
+  rpc ExportData(ExportDataRequest) returns (ExportDataResponse);
+}
+
+message UserProfile {
+  string id = 1;
+  string username = 2;
+  string email = 3;
+  string avatar_url = 4;
+  string bio = 5;
+  string website = 6;
+  string role = 7;
+  int64 post_count = 8;
+  int64 follower_count = 9;
+  int64 following_count = 10;
+  bool is_following = 11;
+  bool is_blocked = 12;
+  string created_at = 13;
+}
+
+message GetProfileRequest {
+  string user_id = 1;
+  string username = 2;
+}
+
+message GetProfileResponse {
+  UserProfile user = 1;
+}
+
+message UpdateProfileRequest {
+  string display_name = 1;
+  string bio = 2;
+  string website = 3;
+  string avatar_key = 4;
+}
+
+message UpdateProfileResponse {
+  UserProfile user = 1;
+}
+
+message FollowUserRequest {
+  string target_user_id = 1;
+}
+
+message FollowUserResponse {
+  bool success = 1;
+}
+
+message UnfollowUserRequest {
+  string target_user_id = 1;
+}
+
+message UnfollowUserResponse {
+  bool success = 1;
+}
+
+message ListUserPostsRequest {
+  string user_id = 1;
+  string tab = 2; // posts, upvoted, commented, saved
+  string cursor = 3;
+  int32 limit = 4;
+}
+
+message ListUserPostsResponse {
+  repeated Post posts = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message GetFollowStatsRequest {
+  string user_id = 1;
+}
+
+message GetFollowStatsResponse {
+  int64 followers = 1;
+  int64 following = 2;
+}
+
+message DeleteAccountRequest {
+  string password = 1;
+  string reason = 2;
+}
+
+message DeleteAccountResponse {
+  bool success = 1;
+}
+
+message ExportDataRequest {}
+
+message ExportDataResponse {
+  string export_url = 1;
+}

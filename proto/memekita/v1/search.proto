@@ -1,0 +1,38 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/post.proto";
+
+service SearchService {
+  rpc Search(SearchRequest) returns (SearchResponse);
+}
+
+message SearchRequest {
+  string query = 1;
+  string type = 2; // all, post, tag, user
+  string cursor = 3;
+  int32 limit = 4;
+}
+
+message SearchResultUser {
+  string id = 1;
+  string username = 2;
+  string avatar_url = 3;
+  bool is_following = 4;
+}
+
+message SearchResultTag {
+  string tag = 1;
+  int64 post_count = 2;
+}
+
+message SearchResponse {
+  repeated Post posts = 1;
+  repeated SearchResultUser users = 2;
+  repeated SearchResultTag tags = 3;
+  string next_cursor = 4;
+  bool has_more = 5;
+}

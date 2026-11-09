@@ -1,0 +1,2 @@
+import { Card, Table, Button } from '../../components/Astryx'
+export default function Duels(){ return <div><h1>Duel</h1><Card><h3>Duel Berjalan</h3><Table columns={[{key:'id',title:'ID'},{key:'status',title:'Status'},{key:'aksi',title:'',render:()=><Button>Batalkan</Button>}]} data={[{id:'1', status:'open'}]} /></Card><Card style={{marginTop:16}}><h3>Juara Mingguan</h3><Table columns={[{key:'winner',title:'Pemenang'}]} data={[{winner:'post #123'}]} /></Card></div> }

@@ -1,0 +1,63 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+message Empty {}
+
+message PaginationRequest {
+  string cursor = 1;
+  int32 limit = 2;
+}
+
+message PaginationResponse {
+  string next_cursor = 1;
+  bool has_more = 2;
+}
+
+message ErrorDetail {
+  string field = 1;
+  string message = 2;
+}
+
+enum MediaType {
+  MEDIA_TYPE_UNSPECIFIED = 0;
+  MEDIA_TYPE_IMAGE = 1;
+  MEDIA_TYPE_GIF = 2;
+  MEDIA_TYPE_VIDEO = 3;
+}
+
+enum PostStatus {
+  POST_STATUS_UNSPECIFIED = 0;
+  POST_STATUS_PROCESSING = 1;
+  POST_STATUS_PUBLISHED = 2;
+  POST_STATUS_HIDDEN = 3;
+  POST_STATUS_REMOVED = 4;
+}
+
+enum UserRole {
+  USER_ROLE_UNSPECIFIED = 0;
+  USER_ROLE_USER = 1;
+  USER_ROLE_MODERATOR = 2;
+  USER_ROLE_ADMIN = 3;
+}
+
+enum ReportReason {
+  REPORT_REASON_UNSPECIFIED = 0;
+  REPORT_REASON_SPAM = 1;
+  REPORT_REASON_SARA = 2;
+  REPORT_REASON_PORNOGRAPHY = 3;
+  REPORT_REASON_VIOLENCE = 4;
+  REPORT_REASON_COPYRIGHT = 5;
+  REPORT_REASON_OTHER = 6;
+}
+
+enum ReactionType {
+  REACTION_TYPE_UNSPECIFIED = 0;
+  REACTION_TYPE_NGAKAK = 1;
+  REACTION_TYPE_RELATE = 2;
+  REACTION_TYPE_ANJAY = 3;
+  REACTION_TYPE_SEDIH = 4;
+  REACTION_TYPE_MARAH = 5;
+}

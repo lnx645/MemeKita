@@ -1,0 +1,2 @@
+import { Card, Table, Button, Badge } from '../../components/Astryx'
+export default function Posts(){ return <div><h1>Konten (Post)</h1><Card><Table columns={[{key:'title',title:'Judul'},{key:'status',title:'Status',render:(v:any)=><Badge>{v}</Badge>},{key:'aksi',title:'Aksi',render:()=><><Button>Sembunyikan</Button> <Button variant="danger">Hapus</Button></> }]} data={[{title:'Meme lucu', status:'published'}]} /></Card></div> }

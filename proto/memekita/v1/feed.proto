@@ -1,0 +1,26 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/common.proto";
+import "memekita/v1/post.proto";
+
+service FeedService {
+  rpc GetFeed(GetFeedRequest) returns (GetFeedResponse);
+}
+
+message GetFeedRequest {
+  string tab = 1; // hot, fresh, trending
+  string section_slug = 2;
+  string cursor = 3;
+  int32 limit = 4;
+  bool include_nsfw = 5;
+}
+
+message GetFeedResponse {
+  repeated Post posts = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}

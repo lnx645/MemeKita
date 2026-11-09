@@ -1,0 +1,21 @@
+<resources>
+    <style name="Theme.MemeKita" parent="Theme.Material3.DayNight">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="android:fontFamily">@font/manrope_regular</item>
+        <item name="fontFamily">@font/manrope_regular</item>
+    </style>
+    <style name="Theme.MemeKita.Splash" parent="Theme.MemeKita">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+    <style name="TextAppearance.MemeKita.Title" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/manrope_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextAppearance.MemeKita.PostTitle" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/manrope_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

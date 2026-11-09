@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS app_settings, audit_logs, bookmarks, post_reactions, coin_transactions, coin_packages, user_coins, tips, challenge_entries, duel_votes, duels, meme_templates, mod_actions, reports, notifications, follows, comment_votes, comments, votes, post_tags, posts, challenges, sections, users CASCADE;

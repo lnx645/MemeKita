@@ -1,0 +1,73 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+service CommentService {
+  rpc ListComments(ListCommentsRequest) returns (ListCommentsResponse);
+  rpc CreateComment(CreateCommentRequest) returns (CreateCommentResponse);
+  rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);
+  rpc VoteComment(VoteCommentRequest) returns (VoteCommentResponse);
+}
+
+message Comment {
+  string id = 1;
+  string post_id = 2;
+  string user_id = 3;
+  string username = 4;
+  string avatar_url = 5;
+  string parent_id = 6;
+  string body = 7;
+  string media_url = 8;
+  int64 upvotes = 9;
+  int64 downvotes = 10;
+  int32 my_vote = 11;
+  string status = 12;
+  string created_at = 13;
+  repeated Comment replies = 14;
+}
+
+message ListCommentsRequest {
+  string post_id = 1;
+  string sort = 2; // top, terbaru
+  string cursor = 3;
+  int32 limit = 4;
+}
+
+message ListCommentsResponse {
+  repeated Comment comments = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message CreateCommentRequest {
+  string post_id = 1;
+  string parent_id = 2;
+  string body = 3;
+  string media_url = 4;
+  string media_key = 5;
+}
+
+message CreateCommentResponse {
+  Comment comment = 1;
+}
+
+message DeleteCommentRequest {
+  string comment_id = 1;
+}
+
+message DeleteCommentResponse {
+  bool success = 1;
+}
+
+message VoteCommentRequest {
+  string comment_id = 1;
+  sint32 value = 2;
+}
+
+message VoteCommentResponse {
+  int64 upvotes = 1;
+  int64 downvotes = 2;
+  int32 my_vote = 3;
+}

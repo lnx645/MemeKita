@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title>MemeKita maskot — wajah ngakak lucu</title>
+  <desc>Maskot emoji bulat tertawa, mata merem, mulut lebar dengan outline ungu MemeKita #6C4CF1, untuk ikon aplikasi dan splash.</desc>
+  <!-- background circle -->
+  <circle cx="100" cy="100" r="92" fill="#FFD93D" stroke="#6C4CF1" stroke-width="8"/>
+  <!-- highlight -->
+  <ellipse cx="70" cy="60" rx="22" ry="14" fill="white" opacity="0.35"/>
+  <!-- eyes — tertawa merem (garis lengkung) -->
+  <path d="M 55 78 Q 68 62 81 78" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M 119 78 Q 132 62 145 78" stroke="#1A1A1A" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <!-- alis ngakak -->
+  <path d="M 52 68 Q 68 55 84 68" stroke="#6C4CF1" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M 116 68 Q 132 55 148 68" stroke="#6C4CF1" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <!-- mulut besar ngakak -->
+  <path d="M 58 118 Q 100 175 142 118 Q 100 135 58 118" fill="#1A1A1A"/>
+  <!-- gigi atas -->
+  <path d="M 68 118 Q 100 132 132 118 Q 100 125 68 118" fill="white"/>
+  <!-- lidah -->
+  <ellipse cx="100" cy="149" rx="22" ry="14" fill="#EF4444"/>
+  <!-- pipi pink -->
+  <ellipse cx="42" cy="105" rx="12" ry="8" fill="#FF8FA0" opacity="0.85"/>
+  <ellipse cx="158" cy="105" rx="12" ry="8" fill="#FF8FA0" opacity="0.85"/>
+  <!-- air mata ngakak (opsional) -->
+  <ellipse cx="152" cy="88" rx="6" ry="9" fill="#00B8A9" opacity="0.9"/>
+  <ellipse cx="152" cy="88" rx="2.5" ry="3.5" fill="white" opacity="0.7"/>
+</svg>

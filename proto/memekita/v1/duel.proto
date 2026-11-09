@@ -1,0 +1,66 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/post.proto";
+
+service DuelService {
+  rpc ListDuels(ListDuelsRequest) returns (ListDuelsResponse);
+  rpc VoteDuel(VoteDuelRequest) returns (VoteDuelResponse);
+  rpc GetDuelResult(GetDuelResultRequest) returns (GetDuelResultResponse);
+  rpc GetWeeklyChampions(GetWeeklyChampionsRequest) returns (GetWeeklyChampionsResponse);
+}
+
+message Duel {
+  string id = 1;
+  Post post_a = 2;
+  Post post_b = 3;
+  string starts_at = 4;
+  string ends_at = 5;
+  string status = 6;
+  string winner_post_id = 7;
+  int64 votes_a = 8;
+  int64 votes_b = 9;
+  double percent_a = 10;
+  double percent_b = 11;
+  string my_vote_post_id = 12;
+}
+
+message ListDuelsRequest {
+  string status = 1; // open, closed
+  string cursor = 2;
+  int32 limit = 3;
+}
+
+message ListDuelsResponse {
+  repeated Duel duels = 1;
+  string next_cursor = 2;
+  bool has_more = 3;
+}
+
+message VoteDuelRequest {
+  string duel_id = 1;
+  string post_id = 2;
+}
+
+message VoteDuelResponse {
+  bool success = 1;
+  double percent_a = 2;
+  double percent_b = 3;
+}
+
+message GetDuelResultRequest {
+  string duel_id = 1;
+}
+
+message GetDuelResultResponse {
+  Duel duel = 1;
+}
+
+message GetWeeklyChampionsRequest {}
+
+message GetWeeklyChampionsResponse {
+  repeated Duel champions = 1;
+}

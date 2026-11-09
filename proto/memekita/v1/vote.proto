@@ -1,0 +1,20 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+service VoteService {
+  rpc VotePost(VotePostRequest) returns (VotePostResponse);
+}
+
+message VotePostRequest {
+  string post_id = 1;
+  sint32 value = 2; // 1, -1, or 0 to cancel
+}
+
+message VotePostResponse {
+  int64 upvotes = 1;
+  int64 downvotes = 2;
+  int32 my_vote = 3;
+}

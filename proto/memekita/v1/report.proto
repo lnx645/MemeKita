@@ -1,0 +1,23 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/common.proto";
+
+service ReportService {
+  rpc CreateReport(CreateReportRequest) returns (CreateReportResponse);
+}
+
+message CreateReportRequest {
+  string target_type = 1; // post, comment
+  string target_id = 2;
+  ReportReason reason = 3;
+  string description = 4;
+}
+
+message CreateReportResponse {
+  string report_id = 1;
+  string message = 2;
+}

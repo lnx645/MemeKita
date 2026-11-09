@@ -1,0 +1,86 @@
+syntax = "proto3";
+package memekita.v1;
+
+option java_package = "com.meme_kita.mobile.proto";
+option java_multiple_files = true;
+
+import "memekita/v1/common.proto";
+
+service PostService {
+  rpc GetPost(GetPostRequest) returns (GetPostResponse);
+  rpc CreateUpload(CreateUploadRequest) returns (CreateUploadResponse);
+  rpc CompletePost(CompletePostRequest) returns (CompletePostResponse);
+  rpc DeletePost(DeletePostRequest) returns (DeletePostResponse);
+}
+
+message Post {
+  string id = 1;
+  string user_id = 2;
+  string username = 3;
+  string avatar_url = 4;
+  string section_id = 5;
+  string section_name = 6;
+  string section_slug = 7;
+  string title = 8;
+  MediaType media_type = 9;
+  string media_url = 10;
+  string thumb_url = 11;
+  int32 width = 12;
+  int32 height = 13;
+  PostStatus status = 14;
+  bool is_nsfw = 15;
+  int64 upvotes = 16;
+  int64 downvotes = 17;
+  int64 comment_count = 18;
+  double hot_score = 19;
+  repeated string tags = 20;
+  string created_at = 21;
+  string challenge_id = 22;
+  int32 my_vote = 23;
+  bool my_bookmark = 24;
+}
+
+message GetPostRequest {
+  string post_id = 1;
+}
+
+message GetPostResponse {
+  Post post = 1;
+}
+
+message CreateUploadRequest {
+  MediaType media_type = 1;
+  int64 file_size = 2;
+  string content_type = 3;
+  string file_name = 4;
+}
+
+message CreateUploadResponse {
+  string upload_url = 1;
+  string media_key = 2;
+  int64 expires_in = 3;
+}
+
+message CompletePostRequest {
+  string media_key = 1;
+  string title = 2;
+  string section_id = 3;
+  repeated string tags = 4;
+  bool is_nsfw = 5;
+  MediaType media_type = 6;
+  int32 width = 7;
+  int32 height = 8;
+  string challenge_id = 9;
+}
+
+message CompletePostResponse {
+  Post post = 1;
+}
+
+message DeletePostRequest {
+  string post_id = 1;
+}
+
+message DeletePostResponse {
+  bool success = 1;
+}
